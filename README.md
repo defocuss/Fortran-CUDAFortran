@@ -52,7 +52,20 @@ Resultados generados:
 
 ## Ejecución
 
-En VS Code se puede ejecutar con Ctrl + Alt + N, siempre que tengas configurado el entorno correctamente.
+En VS Code se puede ejecutar con:
+```bash
+Ctrl + Alt + N
+```
+siempre que tengas configurado el entorno correctamente. Ademas, si se desea compilar los archivos, actualmente en MacOS se debe realizar:
+
+```bash
+gfortran nombre_archivo.f90 nombre_archivo2.f90 -o nombre_programa
+```
+Y luego se ejecuta con:
+
+```bash
+./nombre_programa
+```
 
 ### Difusión térmica
 Compilar y ejecutar los archivos de la carpeta Proyecto-difusionTermica.
