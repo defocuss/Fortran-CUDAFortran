@@ -14,8 +14,8 @@ contains
         a = 0.1
         datos_out = 0.0
 
-        do i = 2, 99
-            do j = 2, 99
+        do j = 2, 99
+            do i = 2, 99
                 ! Formula de Metodo de diferencias finitas
                 datos_out(i,j) = datos_in(i,j) + a*(datos_in(i+1,j) + datos_in(i-1,j) + datos_in(i,j+1) + datos_in(i,j-1) - (4 * datos_in(i,j)))
             end do

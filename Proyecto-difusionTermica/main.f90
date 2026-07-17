@@ -11,14 +11,14 @@ program main
 
     T_actual = 0.0 ! Se inicializa la variable
 
-    do i = 1, 100 ! Recordar que los indices de matrices en fortran parten de 1
-        do j = 1, 100
+    do j = 1, 100 ! Recordar que los indices de matrices en fortran parten de 1
+        do i = 1, 100
             T_actual(i,j) = 20 ! Se rellenan todos los valores de la matriz en 20
         end do
     end do
 
-    do i = 46, 55
-        do j = 46, 55
+    do j = 46, 55
+        do i = 46, 55
             T_actual(i,j) = 100 ! Se actualizan los valores centrales de 10x10 a 100
         end do
     end do
@@ -43,7 +43,7 @@ program main
     end do
 
     print *, 'Los datos se han escrito en el archivo p_calor.txt'
-    
+
     close(10)   
 
 end program main
