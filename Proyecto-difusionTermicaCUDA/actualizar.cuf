@@ -2,7 +2,7 @@ module actualizar_mod
     use cudafor 
     implicit none
 contains
-    ! CORRECCIÓN: "attributes(global)" (con doble T y S al final)
+    ! attributes(global) se utiliza para indicar que se va a ejecutar en la GPU y se llama desde la CPU 
     attributes(global) subroutine actualizar_kernel(datos_in, datos_out)
         implicit none
         
@@ -11,8 +11,8 @@ contains
         real, dimension(:,:), intent(in) :: datos_in
         real, dimension(:,:), intent(out) :: datos_out
 
-        i = (blockIdx%x - 1) * blockDim%x + threadIdx%x 
-        j = (blockIdx%y - 1) * blockDim%y + threadIdx%y 
+        i = (blockIdx%x - 1) * blockDim%x + threadIdx%x ! Se le asigna hilos y celdas a la GPU
+        j = (blockIdx%y - 1) * blockDim%y + threadIdx%y ! Se le asigna hilos y celdas a la GPU
 
         if (i >= 2 .and. i <= 99 .and. j >= 2 .and. j <= 99) then 
             datos_out(i,j) = datos_in(i,j) + a*(datos_in(i+1,j) + datos_in(i-1,j) + &
