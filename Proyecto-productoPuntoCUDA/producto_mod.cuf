@@ -1,0 +1,28 @@
+module producto_mod
+    use cudafor
+    implicit none
+contains
+    ! attributes(global) se utiliza para indicar que se va a ejecutar en la GPU y se llama desde la CPU 
+    attributes(global) subroutine producto_kernel(array1, array2, globalResult)
+        
+        integer :: i
+        real, dimension(:), intent(in) :: array1, array2
+        real, intent(inout) :: globalResult
+        real :: localResult, tmp
+        real, shared :: sharedCount
+
+        if ( threadIdx%x == 1 ) sharedCount = 0
+        call syncthreads()
+
+        i = (blockIdx%x - 1) * blockDim%x + threadIdx%x ! Se le asigna hilos y celdas a la GPU
+
+        localResult = array1(i) * array2(i)
+        
+        tmp = atomicAdd(sharedCount, localResult)
+        call syncthreads()
+
+        if ( threadIdx%x == 1 ) tmp = atomicAdd(globalResult, sharedCount)
+
+    end subroutine producto_kernel
+
+end module producto_mod

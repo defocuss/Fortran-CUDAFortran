@@ -1,0 +1,36 @@
+program main
+    use producto_mod
+    use cudafor
+
+    implicit none
+    ! Declarar variables
+    real, dimension(:), allocatable :: array1, array2
+    real, device, dimension(:), allocatable :: array1_d, array2_d
+    integer, parameter :: n=1000000, tPB = 1000, blocks = 1000! 1.000.000 y 1.000
+    real :: finalResult
+    real, device :: finalResult_d
+
+    !Alocar memoria
+    allocate(array1(n), array1_d(n), array2(n), array2_d(n))
+
+    ! Inicializar con valores pequenos
+    array1 = 0.01
+    array2 = 0.01
+    finalResult_d = 0.0
+
+    ! Alocar variables GPU
+    array1_d = array1
+    array2_d = array2
+
+    ! Se realiza el producto punto
+    call producto_kernel<<<blocks, tPB>>>(array1_d, array2_d, finalResult_d)
+
+    ! Devolver a la CPU
+    finalResult = finalResult_d
+
+
+    print *, 'El producto punto es: ', finalResult
+
+    deallocate(array1, array1_d, array2, array2_d) ! Des alocar la memoria
+
+end program main
