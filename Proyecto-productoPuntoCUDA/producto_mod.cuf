@@ -16,12 +16,12 @@ contains
 
         i = (blockIdx%x - 1) * blockDim%x + threadIdx%x ! Se le asigna hilos y celdas a la GPU
 
-        localResult = array1(i) * array2(i)
+        localResult = array1(i) * array2(i) ! Se agregan resultados locales a la variable localResult
         
-        tmp = atomicAdd(sharedCount, localResult)
+        tmp = atomicAdd(sharedCount, localResult) ! Se realiza la suma atomica para no tener problemas
         call syncthreads()
 
-        if ( threadIdx%x == 1 ) tmp = atomicAdd(globalResult, sharedCount)
+        if ( threadIdx%x == 1 ) tmp = atomicAdd(globalResult, sharedCount) ! Se suma todo a la variable global
 
     end subroutine producto_kernel
 
