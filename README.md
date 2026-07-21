@@ -52,20 +52,8 @@ Resultados generados:
 
 ## Ejecución
 
-En VS Code se puede ejecutar con:
-```bash
-Ctrl + Alt + N
-```
-siempre que tengas configurado el entorno correctamente. Ademas, si se desea compilar los archivos, actualmente en MacOS se debe realizar:
-
-```bash
-gfortran nombre_archivo.f90 nombre_archivo2.f90 -o nombre_programa
-```
-Y luego se ejecuta con:
-
-```bash
-./nombre_programa
-```
+Ver el siguiente README para la instalacion en arch linux y la ejecucion:
+- [Tutorial CUDA en arch y ejecucion.](./installNvidiaCUDA.md)
 
 ### Difusión térmica
 Compilar y ejecutar los archivos de la carpeta Proyecto-difusionTermica.
